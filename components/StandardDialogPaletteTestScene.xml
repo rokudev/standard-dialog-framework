@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="StandardDialogPaletteTestScene" extends="Scene" initialFocus="TestListContent" >
+
+<script type="text/brightscript" >
+<![CDATA[
+  sub addListItem(label as string, dlg as string)
+     testListItem = m.testListContent.createChild("ContentNode")
+     testListItem.TITLE = label
+
+     m.testDialogs.Push(dlg)
+  end sub
+
+  sub listItemSelected()
+'    print "in listItemSelected"; m.list
+    selectedItem = m.list.itemSelected
+'    print "-- selected item "; selectedItem
+
+    if (selectedItem >= 0) and (selectedItem < m.testListContent.GetChildCount())
+	currDialog = createObject("roSGNode", m.testDialogs[selectedItem])
+
+        currDialog.id = "TEST_DIALOG"
+
+'        ? "CREATED DIALOG: "; currDialog
+
+        if currDialog <> invalid
+            ' NOTE: only setting the palette when the dialog is shown
+            ' - no normal use case would change the palette while the
+            '   dialog is shown, but might be interesting to test that
+            '   in a separate test channel
+            setDialogPaletteSource(currDialog)
+
+            m.top.dialog = currDialog
+        end if
+    end if
+  end sub
+
+  function onKeyEvent(key as String, press as Boolean) as Boolean
+       if key = "options" and press
+           nextPalette()
+           return true
+       end if
+
+      return false
+  end function
+
+  sub init()
+     ' create the content for the list
+'     print "starting init"
+
+     m.testListContent = createObject("RoSGNode", "ContentNode")
+
+     ' NOTE: The component name to load for each list item
+     ' is kept in a parallel roArray for now
+     m.testDialogs = createObject("RoArray", 3, true)
+
+     addListItem("Standard Message Dialog", "SampleMessageDialog")
+     addListItem("Standard Keyboard Dialog", "ExampleStandardKeyboardDialog")
+     addListItem("Standard PinPad Dialog", "ExampleStandardPinPadDialog")
+     addListItem("Custom Progress Dialog", "SimpleProgressDialog")
+     addListItem("Custom Determinate Progress Dialog", "SimpleDeterminateProgressDialog")
+     addListItem("Custom Bullet Text Dialog", "ScrollingContentAreaDialog")
+     addListItem("Custom Text Dialog - Single Scrolling Item",   "SimpleTextScrollingDialog")
+     addListItem("Custom Text Dialog - Multiple Scrolling Items", "MultipleScrollingContentItems")
+     addListItem("Custom Keyboard Dialog", "CustomKeyboardDialog")
+
+
+
+'     print "TestComponents"; m.testComponents
+
+     m.list = m.top.FindNode("TestListContent")
+     m.list.content = m.testListContent
+
+     m.list.ObserveField("itemSelected", "listItemSelected")
+
+     ' set focus on the Scene (which will set focus on the initialFocus node)
+     m.top.setFocus(true)
+
+     m.keyGridPaletteSource = m.top.findNode("keyGridPaletteSource")
+     m.scenePaletteSource = m.top.findNode("scenePaletteSource")
+
+     setUpPalettes()
+
+'     print "LABELLIST itemSize"; m.list.itemSize
+'     print "LABELLIST translation"; m.list.translation
+  end sub
+
+  sub setUpPalettes()
+      m.currPaletteTest = 0
+      m.numPaletteTests = 6
+
+      m.greenPalette = createObject("roSGNode", "RSGPalette")
+
+      m.greenPalette.colors = { DialogBackgroundColor: "0x004000FF",
+                                DialogItemColor: "0x00EF00FF",
+                                DialogTextColor: "0x00EF00FF",
+                                DialogFocusColor: "0x00EF00FF",
+                                DialogFocusItemColor: "0x007E00FF",
+                                DialogSecondaryTextColor: "0x00EF0066",
+                                DialogSecondaryItemColor: "0x80FF804D",
+                                DialogInputFieldColor: "0x80FF8080",
+                                DialogKeyboardColor: "0x80FF804D",
+                                DialogFootprintColor: "0x80FF804D" }
+
+      m.redPalette = createObject("roSGNode", "RSGPalette")
+      m.redPalette.colors = {   DialogBackgroundColor: "0x400000FF",
+                                DialogItemColor: "0xEF0000FF",
+                                DialogTextColor: "0xEF0000FF",
+                                DialogFocusColor: "0xEF0000FF",
+                                DialogFocusItemColor: "0x7E0000FF",
+                                DialogSecondaryTextColor: "0xEF000066",
+                                DialogSecondaryItemColor: "0xFF80804D",
+                                DialogInputFieldColor: "0xFF808080",
+                                DialogKeyboardColor: "0xFF80804D",
+                                DialogFootprintColor: "0xFF80804D" }
+
+      m.cyanPalette = createObject("roSGNode", "RSGPalette")
+      m.cyanPalette.colors = {  DialogBackgroundColor: "0x004040FF",
+                                DialogItemColor: "0x00EFEFFF",
+                                DialogTextColor: "0x00EFEFFF",
+                                DialogFocusColor: "0x00EFEFFF",
+                                DialogFocusItemColor: "0x007E7EFF",
+                                DialogSecondaryTextColor: "0x00EFEF66",
+                                DialogSecondaryItemColor: "0x80FFFF4D",
+                                DialogInputFieldColor: "0x80FFFF80",
+                                DialogKeyboardColor: "0x80FFFF4D",
+                                DialogFootprintColor: "0x80FFFF4D" }
+
+      m.multiColorPalette = createObject("roSGNode", "RSGPalette")
+      m.blueColors = {          DialogBackgroundColor: "0x002040FF",
+                                DialogItemColor: "0x007FEFFF",
+                                DialogTextColor: "0x007FEFFF",
+                                DialogFocusColor: "0x007FEFFF",
+                                DialogFocusItemColor: "0x003E7EFF",
+                                DialogSecondaryTextColor: "0x007FEF66",
+                                DialogSecondaryItemColor: "0x807FFF4D",
+                                DialogInputFieldColor: "0x807FFF80",
+                                DialogKeyboardColor: "0x807FFF4D",
+                                DialogFootprintColor: "0x807FFF4D" }
+
+      m.magentaColors = {       DialogBackgroundColor: "0x400040FF",
+                                DialogItemColor: "0xEF00EFFF",
+                                DialogTextColor: "0xEF00EFFF",
+                                DialogFocusColor: "0xEF00EFFF",
+                                DialogFocusItemColor: "0x7E007EFF",
+                                DialogSecondaryTextColor: "0xEF00EF66",
+                                DialogSecondaryItemColor: "0xFF80FF4D",
+                                DialogInputFieldColor: "0xFF80FF80",
+                                DialogKeyboardColor: "0xFF80FF4D",
+                                DialogFootprintColor: "0xFF80FF4D" }
+
+      updatePaletteFeedback()
+  end sub
+
+  sub setDialogPaletteSource(dialog as object)
+      if dialog = invalid
+           return
+      end if
+      if m.currPaletteTest = 0
+           dialog.palette = invalid
+           m.top.palette = invalid
+      else if m.currPaletteTest = 1
+           dialog.palette = m.greenPalette
+           m.top.palette = invalid
+      else if m.currPaletteTest = 2
+           dialog.palette = m.redPalette
+           m.top.palette = m.cyanPalette
+      else if m.currPaletteTest = 3
+           dialog.palette = m.multiColorPalette
+           m.multiColorPalette.colors = m.blueColors
+           m.top.palette = invalid
+      else if m.currPaletteTest = 4
+           dialog.palette = m.multiColorPalette
+           m.multiColorPalette.colors = m.magentaColors
+           m.top.palette = invalid
+      else if m.currPaletteTest = 5
+           dialog.palette = invalid
+           m.top.palette = m.cyanPalette
+	   ? "M.TOP.PALETTE IS: "; m.top.palette.colors
+      end if
+  end sub
+
+  sub nextPalette()
+      ? "in nextPalette"
+      m.currPaletteTest = (m.currPaletteTest + 1) mod m.numPaletteTests
+      updatePaletteFeedback()
+  end sub
+
+  sub updatePaletteFeedback()
+      if m.currPaletteTest = 0
+           m.keyGridPaletteSource.text = "DynamicKeyGrid: No Palette"
+           m.scenePaletteSource.text = "DynamicKeyGrid: No Palette"
+      else if m.currPaletteTest = 1
+           m.keyGridPaletteSource.text = "DynamicKeyGrid: m.greenPalette (*)"
+           m.scenePaletteSource.text = "Scene: No Palette"
+      else if m.currPaletteTest = 2
+           m.keyGridPaletteSource.text = "DynamicKeyGrid: m.redPalette (*)"
+           m.scenePaletteSource.text = "Scene: m.cyanPalette"
+      else if m.currPaletteTest = 3
+           m.keyGridPaletteSource.text = "DynamicKeyGrid: m.multiColorPalette w/ m.blueColors (*)"
+           m.scenePaletteSource.text = "Scene: No Palette"
+      else if m.currPaletteTest = 4
+           m.keyGridPaletteSource.text = "DynamicKeyGrid: m.multiColorPalette w/ m.magentaColors (*)"
+           m.scenePaletteSource.text = "Scene: No Palette"
+      else if m.currPaletteTest = 5
+           m.keyGridPaletteSource.text = "DynamicKeyGrid: No Palette"
+           m.scenePaletteSource.text = "Scene: m.cyanPalette (*)"
+      end if
+  end sub
+
+]]>
+</script>
+
+<children>
+  <SimpleLabel translation="[150, 100]" fontUri="font:LargeBoldSystemFont" text="PinPad with Palette DynamicKeyGrid Test" />
+  <SimpleLabel translation="[150, 160]" fontUri="font:SmallSystemFont" text="Hit the * key to cycle through various palette update option for the DynamicKeyGrid" />
+  <SimpleLabel id="keyGridPaletteSource" translation="[150, 225]" fontUri="font:SmallSystemFont" text="Initial Value" />
+  <SimpleLabel id="scenePaletteSource" translation="[150, 270]" fontUri="font:SmallSystemFont" text="Initial Value" />
+<LabelList
+    id="TestListContent"
+    translation="[150, 380]"
+    itemSize="[1500,72]"
+    itemSpacing="[0, 0]"
+    numRows="7"
+    focusRow="0" >
+</LabelList>
+</children>
+
+</component>

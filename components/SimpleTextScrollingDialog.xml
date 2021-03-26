@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="SimpleTextScrollingDialog" extends="StandardDialog" initialFocus="buttonArea" >
+
+<script type="text/brightscript" >
+<![CDATA[
+function init()
+    print "Creating SimpleTextScrollingDialog"
+
+    m.buttonArea = m.top.findNode("buttonArea")
+    m.top.observeFieldScoped("buttonFocused", "printFocusButton")
+    m.top.observeFieldScoped("buttonSelected", "printSelectedButtonAndClose")
+    m.top.observeFieldScoped("wasClosed", "wasClosedChanged")
+end function
+
+sub printFocusButton()
+    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonFocused).text;" focused"
+end sub
+
+sub printSelectedButtonAndClose()
+    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonSelected).text;" selected"
+    m.top.close = true
+end sub
+
+sub wasClosedChanged()
+    print "SimpleTextScrollingDialog Closed"
+end sub
+
+]]>
+</script>
+
+<children>
+  <StdDlgTitleArea primaryTitle="SimpleTextDialog Example" />
+  <StdDlgContentArea>
+     <StdDlgTextItem scrollable="true" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet aliquam id diam maecenas ultricies mi eget mauris. Ac ut consequat semper viverra nam libero. Tristique senectus et netus et malesuada fames ac turpis egestas. Bibendum ut tristique et egestas quis ipsum suspendisse. Amet consectetur adipiscing elit ut aliquam purus sit amet luctus. Habitant morbi tristique senectus et netus et malesuada. Vitae turpis massa sed elementum tempus egestas sed sed risus. Faucibus ornare suspendisse sed nisi lacus sed viverra tellus in. Vitae tortor condimentum lacinia quis vel eros donec ac. Amet consectetur adipiscing elit ut aliquam purus. Massa enim nec dui nunc." />
+  </StdDlgContentArea>
+  <StdDlgButtonArea id="buttonArea" >
+    <StdDlgButton text="OK" />
+    <StdDlgButton text="Cancel" />
+  </StdDlgButtonArea>
+</children>
+
+</component>

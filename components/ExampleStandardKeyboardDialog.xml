@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="ExampleStandardKeyboardDialog" extends="StandardKeyboardDialog" >
+
+<script type="text/brightscript" >
+<![CDATA[
+function init()
+    print "Creating StandardKeyboardDialog"
+
+'    m.top.width = 1800
+    m.top.title   = "Example StandardKeyboardDialog"
+    m.top.message = ["Hey User! What's your favorite color?"]
+    m.top.buttons = ["OK"]
+    m.top.textEditBox.hintText = "Type the name of a color..."
+
+    m.top.observeFieldScoped("buttonSelected", "dismissDialog")
+    m.top.observeFieldScoped("text", "textChanged")
+
+    m.top.observeFieldScoped("wasClosed", "wasClosedChanged")
+end function
+
+sub wasClosedChanged()
+    print "Example StandardKeyboardDialog Closed"
+end sub
+
+sub textChanged()
+    print "ENTERED TEXT: "; m.top.text
+end sub
+
+sub dismissDialog()
+    m.top.close = true
+end sub
+
+]]>
+</script>
+
+<children>
+</children>
+
+</component>

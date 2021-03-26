@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="ExampleStandardPinPadDialog" extends="StandardPinPadDialog" >
+
+<script type="text/brightscript" >
+<![CDATA[
+function init()
+    print "Creating ExampleStandardPinPadDialog"
+
+'    m.top.width = 640
+    m.top.title   = "Enter your Pin"
+'    m.top.message = ["Pin goes here..."]
+    m.top.buttons = ["OK"]
+    m.top.hintText = "Pin goes here..."
+
+    m.top.observeFieldScoped("buttonSelected", "dismissDialog")
+    m.top.observeFieldScoped("pin", "pinChanged")
+
+    m.top.observeFieldScoped("wasClosed", "wasClosedChanged")
+end function
+
+sub wasClosedChanged()
+    print "Example StandardKeyboardDialog Closed"
+end sub
+
+sub pinChanged()
+    print "ENTERED PIN: "; m.top.pin
+end sub
+
+sub dismissDialog()
+    m.top.close = true
+end sub
+
+]]>
+</script>
+
+<children>
+</children>
+
+</component>

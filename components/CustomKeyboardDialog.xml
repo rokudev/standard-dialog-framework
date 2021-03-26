@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="CustomKeyboardDialog" extends="StandardDialog" initialFocus="buttonArea" >
+
+<script type="text/brightscript" >
+<![CDATA[
+function init()
+    print "Creating CustomKeyboardDialog"
+
+    m.buttonArea = m.top.findNode("buttonArea")
+
+    m.top.width = 1552
+
+    m.kbItem = m.top.findNode("kbItem")
+    m.kbItem.observeFieldScoped("text", "textChanged")
+
+    m.top.observeFieldScoped("buttonFocused", "printFocusButton")
+    m.top.observeFieldScoped("buttonSelected", "printSelectedButtonAndClose")
+    m.top.observeFieldScoped("wasClosed", "wasClosedChanged")
+end function
+
+sub printFocusButton()
+    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonFocused).text;" focused"
+end sub
+
+sub printSelectedButtonAndClose()
+    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonSelected).text;" selected"
+    m.top.close = true
+end sub
+
+sub wasClosedChanged()
+    print "SimpleTextDialog Closed"
+end sub
+
+sub textChanged()
+    print "Keyboard Text Changed: "; m.kbItem.text
+end sub
+
+]]>
+</script>
+
+<children>
+  <StdDlgTitleArea primaryTitle="Keyboard Dialog Example" />
+  <StdDlgContentArea >
+     <StdDlgKeyboardItem id="kbItem" keyLayoutType="keyboard" />
+  </StdDlgContentArea>
+  <StdDlgButtonArea id="buttonArea" >
+    <StdDlgButton text="OK" />
+    <StdDlgButton text="Cancel" />
+  </StdDlgButtonArea>
+</children>
+
+</component>

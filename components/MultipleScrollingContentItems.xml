@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="MultipleScrollingContentItems" extends="StandardDialog" initialFocus="buttonArea" >
+
+<script type="text/brightscript" >
+<![CDATA[
+function init()
+    print "Creating MultipleScrollingContentItems"
+
+    m.buttonArea = m.top.findNode("buttonArea")
+    m.top.observeFieldScoped("buttonFocused", "printFocusButton")
+    m.top.observeFieldScoped("buttonSelected", "printSelectedButtonAndClose")
+    m.top.observeFieldScoped("wasClosed", "wasClosedChanged")
+end function
+
+sub printFocusButton()
+    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonFocused).text;" focused"
+end sub
+
+sub printSelectedButtonAndClose()
+    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonSelected).text;" selected"
+    m.top.close = true
+end sub
+
+sub wasClosedChanged()
+    print "MultipleScrollingContentItems_BottomBigger"
+end sub
+
+]]>
+</script>
+
+<children>
+  <StdDlgTitleArea primaryTitle="Multiple Scrollable Content Items" />
+  <!-- the tallest StdDlgTextItem below (i.e. the last one) will be made scrollable -->
+  <StdDlgContentArea>
+     <StdDlgTextItem scrollable="true" text="Traditional Christmas Carol" />
+     <StdDlgTextItem scrollable="true" text="One the ninth day of Christmas my true love gave to me - Nine Ladies Dancing - Eight Maids a-Milking - Seven Swans a-Swimming - Six Geese a-Laying - FIVE GOLD RINGS!!! - Four Calling Birds - Three French Hens - Two Turtle Doves - And a Partidge in a Pear Tree" />
+     <StdDlgTextItem scrollable="true" text="One the twelfth day of Christmas my true love gave to me - Twelve Drummers Drumming - Eleven Pipers Piping - Ten Lords a-Leaping - Nine Ladies Dancing - Eight Maids a-Milking - Seven Swans a-Swimming - Six Geese a-Laying - FIVE GOLD RINGS!!! - Four Calling Birds - Three French Hens - Two Turtle Doves - And a Partidge in a Pear Tree. Merry Christmas and a Happy New Year!" />
+  </StdDlgContentArea>
+  <StdDlgButtonArea id="buttonArea" >
+    <StdDlgButton text="OK" />
+    <StdDlgButton text="Cancel" />
+  </StdDlgButtonArea>
+</children>
+
+</component>

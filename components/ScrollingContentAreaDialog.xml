@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="ScrollingContentAreaDialog" extends="StandardDialog" initialFocus="buttonArea" >
+
+<script type="text/brightscript" >
+<![CDATA[
+function init()
+    print "Creating ScrollingContentAreaDialog"
+
+    m.buttonArea = m.top.findNode("buttonArea")
+    m.top.observeFieldScoped("buttonFocused", "printFocusButton")
+    m.top.observeFieldScoped("buttonSelected", "printSelectedButtonAndClose")
+    m.top.observeFieldScoped("wasClosed", "wasClosedChanged")
+end function
+
+sub printFocusButton()
+    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonFocused).text;" focused"
+end sub
+
+sub printSelectedButtonAndClose()
+    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonSelected).text;" selected"
+    m.top.close = true
+end sub
+
+sub wasClosedChanged()
+    print "ScrollingContentAreaDialog Closed"
+end sub
+
+]]>
+</script>
+
+<children>
+  <StdDlgTitleArea primaryTitle="StdDlgBulletTextItem" />
+  <StdDlgContentArea>
+     <StdDlgTextItem text="Custom Dialog Items" />
+     <StdDlgBulletTextItem bulletText='["Bullet Text", "Text", "Keyboard", "Progress Indicator", "Determinate Progress Indicator"]' />
+  </StdDlgContentArea>
+  <StdDlgButtonArea id="buttonArea" >
+    <StdDlgButton text="OK" />
+    <StdDlgButton text="Cancel" />
+  </StdDlgButtonArea>
+</children>
+
+</component>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="SimpleDeterminateProgressDialog" extends="StandardDialog" initialFocus="buttonArea" >
+
+<script type="text/brightscript" >
+<![CDATA[
+function init()
+    print "Creating SimpleProgressDialog"
+
+    m.progressItem = m.top.findNode("theProgressItem")
+
+    m.timer = createObject("roSGNode", "Timer")
+    m.timer.duration = 0.25
+    m.timer.repeat = true
+    m.timer.observeFieldScoped("fire", "timerFired")
+
+    m.timer.control = "start"
+
+    m.incr = 1
+
+    m.buttonArea = m.top.findNode("buttonArea")
+    m.top.observeFieldScoped("buttonFocused", "printFocusButton")
+    m.top.observeFieldScoped("buttonSelected", "printSelectedButtonAndClose")
+    m.top.observeFieldScoped("wasClosed", "wasClosedChanged")
+end function
+
+sub timerFired()
+    currPercent = m.progressItem.percent
+    nextPercent = currPercent + m.incr
+    if nextPercent > 100
+        m.incr = -1
+	nextPercent = currPercent + m.incr
+    else if nextPercent < 0
+        m.incr = 1
+	nextPercent = currPercent + m.incr
+    end if
+
+    ? "setting percent to: "; nextPercent
+    m.progressItem.percent = nextPercent
+end sub
+
+sub printFocusButton()
+    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonFocused).text;" focused"
+end sub
+
+sub printSelectedButtonAndClose()
+    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonSelected).text;" selected"
+    m.top.close = true
+end sub
+
+sub wasClosedChanged()
+    print "SimpleProgressDialog Closed"
+end sub
+
+]]>
+</script>
+
+<children>
+  <StdDlgTitleArea primaryTitle="Changing Theme" />
+  <StdDlgContentArea>
+     <StdDlgTextItem text="Talk about the big mouth monsters here." />
+     <StdDlgDeterminateProgressItem id="theProgressItem" text="Changing Theme to Big Mouth Monsters..." />
+  </StdDlgContentArea>
+  <StdDlgButtonArea id="buttonArea" >
+    <StdDlgButton text="OK" />
+    <StdDlgButton text="Cancel" />
+  </StdDlgButtonArea>
+</children>
+
+</component>
