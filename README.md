@@ -4,6 +4,14 @@ As part of the Roku OS 10.0 release, Roku's standard dialog framework enables de
 
 This sample channel includes examples for the built-in standard keyboard, PINpad, and message dialogs, and custom dialogs featuring the standard dialog building blocks such as the keyboard, text and bullet text, and progress loaders.
 
+To run this sample channel, follow these steps:
+
+1. Download this sample.
+
+2. Follow the steps in [Development environment setup](https://developer.roku.com/docs/developer-program/getting-started/developer-setup.md) to enable developer mode on your device, and then archive and sideload it.
+
+3. In the UI of the sample channel, select a dialog from the list.
+
 ## Summary
 
 These new pre-built and custom standard keyboards are summarized as follows:
