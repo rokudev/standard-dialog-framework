@@ -67,7 +67,7 @@ The following table summarizes the standard dialog nodes used to build custom di
 | ++++ StdDlgContentArea | Contains the main body of the dialog, which may include zero to multiple content area items (**StdDlgItemBase** nodes)|
 | ++++ StdDlgButtonArea  | Contains any buttons (**StdDlgButton** nodes) in the button area located at the bottom of the dialog: |
 
-#### Custom dialog items for content area
+#### Custom dialog items (for Content Area)
 
 | Node                             | Description                                                  | Example                                                      |
 | -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -79,7 +79,7 @@ The following table summarizes the standard dialog nodes used to build custom di
 | ++ StdDlgProgressItem            | A spinning progress indicator for tasks that take an indeterminate amount of time. | ![std-dlg-progress-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-progress-item.jpg) |
 | ++ StdDlgTextItem                | A block of text.                                             | ![std-dlg-text-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-text-item.jpg) |
 
-#### Custom dialog buttons for button area
+#### Custom dialog buttons (for Button Area)
 
 | Node         | Description       | Example                                                      |
 | :----------- | :---------------- | :----------------------------------------------------------- |
