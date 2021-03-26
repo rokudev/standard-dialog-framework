@@ -43,6 +43,8 @@ The pre-built message, keyboard, pin pad, and progress dialogs inherit their bas
 
 As described in the dialog structure overview, a dialog contains three areas: title, content, and button. Each of these areas has a corresponding node for building a custom dialog: **StdDlgTitleArea**, **StdDlgContentArea**, and **StdDlgButtonArea**. Each of these nodes inherits its functionality from the **StdDlgAreaBase** node, which extends the **Group** node.
 
+#### Custom dialog areas
+
 
 - The **StdDlgTitleArea** node does not contain any child nodes. It displays the title and/or icons at the top of the dialog. 
 
@@ -62,10 +64,10 @@ The following table summarizes the standard dialog nodes used to build custom di
 | Group                  |                                                              |
 | ++ StdDlgAreaBase      | Provides common functionality for the **StdDlgTitleArea**, **StdDlgContentArea** and **StdDlgButtonArea** classes. |
 | ++++ StdDlgTitleArea   | Contains the title information and/or icons at the top of the dialog. |
-| ++++ StdDlgContentArea | Contains the main body of the dialog, which may include zero to multiple content area items (**StdDlgItemBase** nodes), which are as follows: ${std-dlg-items-table} |
+| ++++ StdDlgContentArea | Contains the main body of the dialog, which may include zero to multiple content area items (**StdDlgItemBase** nodes)|
 | ++++ StdDlgButtonArea  | Contains any buttons (**StdDlgButton** nodes) in the button area located at the bottom of the dialog: |
 
-{#std-dlg-items-table}
+#### Custom dialog items for content area
 
 | Node                             | Description                                                  | Example                                                      |
 | -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -77,7 +79,7 @@ The following table summarizes the standard dialog nodes used to build custom di
 | ++ StdDlgProgressItem            | A spinning progress indicator for tasks that take an indeterminate amount of time. | ![std-dlg-progress-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-progress-item.jpg) |
 | ++ StdDlgTextItem                | A block of text.                                             | ![std-dlg-text-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-text-item.jpg) |
 
-{#std-dlg-button-table}
+#### Custom dialog buttons for button area
 
 | Node         | Description       | Example                                                      |
 | :----------- | :---------------- | :----------------------------------------------------------- |
