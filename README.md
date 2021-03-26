@@ -6,11 +6,11 @@ This sample channel includes examples for the built-in standard keyboard, PINpad
 
 To run this sample channel, follow these steps:
 
-1. Download this sample.
+1. Download and extract the sample channel.
 
-2. Follow the steps in [Development environment setup](https://developer.roku.com/docs/developer-program/getting-started/developer-setup.md) to enable developer mode on your device, and then archive and sideload it.
+2. Follow the steps in [Development environment setup](https://developer.roku.com/docs/developer-program/getting-started/developer-setup.md) to enable developer mode on your device, archive the files, and then sideload the archive to your Roku device.
 
-3. In the UI of the sample channel, select a dialog from the list.
+3. In the UI of the sample channel, select a keyboard from the list.
 
 ## Summary
 
