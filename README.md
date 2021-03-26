@@ -1,6 +1,12 @@
 # Standard dialog framework
 
-As part of the Roku OS 10.0 release, Roku's standard dialog framework enables developers to use new pre-built modal pop-up dialogs and build custom ones. Dialogs are used to display information to users that require their immediate attention (for example, selecting a subscription product, entering credentials or account information, informing the user that a screen is loading, and so on). These new pre-built and custom standard keyboards are summarized as follows:
+As part of the Roku OS 10.0 release, Roku's standard dialog framework enables developers to use new pre-built modal pop-up dialogs and build custom ones. Dialogs are used to display information to users that require their immediate attention (for example, selecting a subscription product, entering credentials or account information, informing the user that a screen is loading, and so on). 
+
+This sample channel includes examples for the built-in standard keyboard, PINpad, and message dialogs, and custom dialogs featuring the standard dialog building blocks such as the keyboard, text and bullet text, and progress loaders.
+
+## Summary
+
+These new pre-built and custom standard keyboards are summarized as follows:
 
 - **New pre-built message, keyboard, pin pad, and progress dialogs**. These new dialogs feature updated graphics and color palette support that enable developers to provide a consistent user experience across the dialogs in their channel (and across the Roku platform as developers can easily adopt the new design of Roku OS system dialogs). In addition, the keyboard and pin pad dialogs include voice entry support for faster customer sign-ups and sign-ins. These new dialog nodes deprecate the [legacy versions](https://developer.roku.com/docs/references/scenegraph/dialog-nodes/dialog.md). 
 
