@@ -63,6 +63,7 @@
      addListItem("Custom Text Dialog - Single Scrolling Item",   "SimpleTextScrollingDialog")
      addListItem("Custom Text Dialog - Multiple Scrolling Items", "MultipleScrollingContentItems")
      addListItem("Custom Keyboard Dialog", "CustomKeyboardDialog")
+	 addListItem("Custom Items Dialog", "CustomItems")
 
 
 
