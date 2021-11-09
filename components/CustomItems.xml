@@ -39,10 +39,18 @@ end sub
 <children>
     <StdDlgTitleArea primaryTitle="Custom Item Dialog Example" />
     <StdDlgContentArea>
-        <StdDlgTextItem text="Here is an example of a custom item in a dialog: a barcode" />
-        <StdDlgCustomItem id="barcodeItem">
-            <Barcode text="Q12344567890" />
-        </StdDlgCustomItem>
+        <StdDlgTextItem text="Here is an example of custom items in a dialog: a barcode and labels within nested LayoutGroups" />
+        <StdDlgCustomItem>
+            <LayoutGroup layoutDirection="vert" itemSpacings="[20,10]">
+            	 <LayoutGroup layoutDirection="horiz" itemSpacings="[20,10]">
+            		<Label text="Scan this barcode to receive an offer" color="theme:StandardDialogSecondaryTextColor" />
+            	</LayoutGroup>
+            	<LayoutGroup layoutDirection="horiz" vertAlignment="bottom" itemSpacings="[20,10]">
+            		<Barcode id="barcodeItem" text="Q12344567890" />
+					<Label width="300" wrap="true" text="Check your email for the offer" color="theme:StandardDialogSecondaryTextColor" />            	
+				</LayoutGroup>
+            </LayoutGroup>
+    	</StdDlgCustomItem>
     </StdDlgContentArea>
     <StdDlgButtonArea id="buttonArea">
         <StdDlgButton text="OK" />
