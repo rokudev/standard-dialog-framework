@@ -1,23 +1,47 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
-<component name="CustomItems" extends="StandardDialog" initialFocus="buttonArea" >
+<component name="TwoColumnCustomItemExample" extends="StandardDialog" initialFocus="buttonArea" >
 
 <script type="text/brightscript" >
 <![CDATA[
 function init()
     print "Creating CustomItems"
 
-    m.buttonArea = m.top.findNode("buttonArea")
-    m.top.observeFieldScoped("buttonFocused", "printFocusButton")
-    m.top.observeFieldScoped("buttonSelected", "printSelectedButtonAndClose")
-    m.top.observeFieldScoped("wasClosed", "wasClosedChanged")
+    ' the left column will be set to 2/3 of the total custom item
+    ' width in the custom item's width field observer
+    m.leftColumnPercent = 0.67
 
-    m.barcodeItem = m.top.findNode("barcodeItem")
-    m.barcodeItem.observeField("width", "barcodeWidthChanged")
+    m.subscriptiontListItem = m.top.findNode("subscriptiontListItem")
+    m.subscriptiontListItem.observeField("width", "subscriptiontListItemWidthChanged")
+    m.subscriptiontList = m.top.findNode("subscriptiontList")
+
+    addSubscriptionOption("One Week", "Free")
+    addSubscriptionOption("One Month", "$2")
+    addSubscriptionOption("One Year",  "$20")
+
+    m.buttonArea = m.top.findNode("buttonArea")
+    m.top.observeFieldScoped("buttonSelected", "printSelectedButtonAndClose")
 end function
 
-sub printFocusButton()
-    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonFocused).text;" focused"
+sub addSubscriptionOption(time as string, price as string)
+    optLayout = m.subscriptiontList.createChild("LayoutGroup")
+    optLayout.layoutDirection = "horiz"
+    timeLabel = optLayout.createChild("Label")
+    timeLabel.text = time
+    timeLabel.color = "0x121212FF"
+    priceLabel = optLayout.createChild("Label")
+    priceLabel.text = price
+    priceLabel.color = "0x121212FF"
+end sub
+
+sub subscriptiontListItemWidthChanged()
+    numItems = m.subscriptiontList.getChildCount()
+    for i = 0 to numItems - 1
+        item = m.subscriptiontList.getChild(i)
+        timeLabel = item.getChild(0)
+        timeLabel.width = m.leftColumnPercent * m.subscriptiontListItem.width
+	? "set width of timeLabel "; timeLabel.text; " to "; timeLabel.width
+    end for
 end sub
 
 sub printSelectedButtonAndClose()
@@ -25,32 +49,17 @@ sub printSelectedButtonAndClose()
     m.top.close = true
 end sub
 
-sub wasClosedChanged()
-    print "ActionCards Closed"
-end sub
-
-sub barcodeWidthChanged()
-    print "Barcode width changed to ";m.barcodeItem.width
-end sub
-
 ]]>
 </script>
 
 <children>
-    <StdDlgTitleArea primaryTitle="Custom Item Dialog Example" />
+    <StdDlgTitleArea primaryTitle="StdDlgCustomItem: Two Columns" />
     <StdDlgContentArea>
-        <StdDlgTextItem text="Here is an example of custom items in a dialog: a barcode and labels within nested LayoutGroups" />
-        <StdDlgCustomItem>
-            <LayoutGroup layoutDirection="vert" itemSpacings="[20,10]">
-            	 <LayoutGroup layoutDirection="horiz" itemSpacings="[20,10]">
-            		<Label text="Scan this barcode to receive an offer" color="theme:StandardDialogSecondaryTextColor" />
-            	</LayoutGroup>
-            	<LayoutGroup layoutDirection="horiz" vertAlignment="bottom" itemSpacings="[20,10]">
-            		<Barcode id="barcodeItem" text="Q12344567890" />
-					<Label width="300" wrap="true" text="Check your email for the offer" color="theme:StandardDialogSecondaryTextColor" />            	
-				</LayoutGroup>
+        <StdDlgTextItem text="Subscription options" />
+        <StdDlgCustomItem id="subscriptiontListItem">
+            <LayoutGroup id="subscriptiontList" layoutDirection="vert" itemSpacings="[20]">
             </LayoutGroup>
-    	</StdDlgCustomItem>
+        </StdDlgCustomItem>
     </StdDlgContentArea>
     <StdDlgButtonArea id="buttonArea">
         <StdDlgButton text="OK" />
