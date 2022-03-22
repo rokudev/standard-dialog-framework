@@ -64,6 +64,12 @@
      addListItem("Custom Text Dialog - Multiple Scrolling Items", "MultipleScrollingContentItems")
      addListItem("Custom Keyboard Dialog", "CustomKeyboardDialog")
 	 addListItem("Custom Items Dialog", "CustomItems")
+     addListItem("Custom ActionCardItems Dialog - None, MoreInfo, and Checkbox iconType", "ActionCardsDialog")
+     addListItem("Custom ActionCardItems Dialog - RadioButton and Checkbox iconType", "RadioButtonActionCardsDialog")
+     addListItem("Custom SideCardArea Dialog - Decorative", "SideCardGlamourShotDialog")
+     addListItem("Custom SideCardArea Dialog - Annotative", "SideCardAnnotationDialog")
+     addListItem("Custom StdDlgCustomItem Dialog - Two Columns", "TwoColumnCustomItemDialog")
+     addListItem("Custom StdDlgMultiStyleItem Dialog", "MultiStyleTextItemDialog")
 
 
 
