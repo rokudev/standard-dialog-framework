@@ -55,46 +55,50 @@ The pre-built message, keyboard, pin pad, and progress dialogs inherit their bas
 
 ### Custom dialog hierarchy and examples
 
-As described in the dialog structure overview, a dialog contains three areas: title, content, and button. Each of these areas has a corresponding node for building a custom dialog: **StdDlgTitleArea**, **StdDlgContentArea**, and **StdDlgButtonArea**. Each of these nodes inherits its functionality from the **StdDlgAreaBase** node, which extends the **Group** node.
+As described in the dialog structure overview, a dialog contains three areas: title, content, and button. Additionally, a custom dialog may include a side card, which is a freeform area to the right or left side of the dialog that is used for displaying decorative images or annotative text.
 
-#### Custom dialog areas
-
-
-- The **StdDlgTitleArea** node does not contain any child nodes. It displays the title and/or icons at the top of the dialog. 
+Each of these areas has a corresponding node for building a custom dialog: **StdDlgTitleArea**, **StdDlgContentArea**, **StdDlgButtonArea**, and **StdDlgSideCardArea**. Each of these nodes inherits its functionality from the **StdDlgAreaBase** node, which extends the **Group** node.
 
 
+- The **StdDlgTitleArea** node does not contain any child nodes. It displays the title and/or icons at the top of the dialog.
 
 
-- The **StdDlgContentArea** node may contain a number of content items such as a block of text, a bullet list or a progress indicator, or dynamic objects such as a pin pad or a keyboard. Each of these content items has a corresponding node that inherits its basic functionality from the **StdDlgItemBase** node. For example, the text block has a **StdDlgTextItem** node, the keyboard has a **StdDlgKeyboardItem** node, and so on. 
 
-  
 
-- The **StdDlgButtonArea** node may contain a single **StdDlgButton** node
+- The **StdDlgContentArea** node may contain a number of content items such as a block of text, a bullet list or a progress indicator, or dynamic objects such as a pin pad or a keyboard. Each of these content items has a corresponding node that inherits its basic functionality from the **StdDlgItemBase** node. For example, the text block has a **StdDlgTextItem** node, the keyboard has a **StdDlgKeyboardItem** node, and so on.
 
-The following table summarizes the standard dialog nodes used to build custom dialogs and their hierarchy. For completeness, the content items and buttons that may be included in the **StdDlgContentArea** and **StdDlgButtonArea** nodes are listed; however, they do not inherit any properties from the nodes. 
 
-| Node                   | Description                                                  |
-| :--------------------- | :----------------------------------------------------------- |
-| Group                  |                                                              |
-| ++ StdDlgAreaBase      | Provides common functionality for the **StdDlgTitleArea**, **StdDlgContentArea** and **StdDlgButtonArea** classes. |
-| ++++ StdDlgTitleArea   | Contains the title information and/or icons at the top of the dialog. |
-| ++++ StdDlgContentArea | Contains the main body of the dialog, which may include zero to multiple content area items (**StdDlgItemBase** nodes)|
-| ++++ StdDlgButtonArea  | Contains any buttons (**StdDlgButton** nodes) in the button area located at the bottom of the dialog: |
 
-#### Custom dialog items (for Content Area)
+- The **StdDlgButtonArea** node may contain a single **StdDlgButton** node.
 
-| Node                             | Description                                                  | Example                                                      |
-| -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| StdDlgItemBase                   | Provides common functionality for all content area items.    |                                                              |
-| ++ StdDlgBulletTextItem          | A bulleted list of text.                                     | ![StdDlgBulletTextItem](https://image.roku.com/ZHZscHItMTc2/StdDlgBulletTextItem-v2.jpg) |
-| ++ StdDlgDeterminateProgressItem | A progress indicator that represents the percentage of the progress that has been completed. | ![std-dlg-determinate-progress-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-determinate-progress-item-2.jpg) |
-| ++ StdDlgGraphicItem             | An image with an optional text label.                        | ![v](https://image.roku.com/ZHZscHItMTc2/std-dlg-graphic-item.jpg) |
-| ++ StdDlgKeyboardItem            | Either a keyboard or PIN pad for the text and voice entry of alphanumeric/symbol strings or numeric digits (typically, short numeric PIN codes), respectively. | ![std-dlg-keyboard-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-keyboard-item.jpg) |
-| ++ StdDlgProgressItem            | A spinning progress indicator for tasks that take an indeterminate amount of time. | ![std-dlg-progress-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-progress-item.jpg) |
-| ++ StdDlgTextItem                | A block of text.                                             | ![std-dlg-text-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-text-item.jpg) |
 
-#### Custom dialog buttons (for Button Area)
 
-| Node         | Description       | Example                                                      |
-| :----------- | :---------------- | :----------------------------------------------------------- |
-| StdDlgButton | A button element. | ![std-dlg-button-2](https://image.roku.com/ZHZscHItMTc2/std-dlg-button-3.jpg) |
+- The **StdDlgSideCardArea** node may contain one or SceneGraph nodes (for example, a [Poster](/docs/references/scenegraph/renderable-nodes/poster.md) node for displaying an image or a [Label](/docs/references/scenegraph/label-nodes/label.md) node for displaying text). 
+
+
+The following table summarizes the standard dialog nodes used to build custom dialogs and their hierarchy. For completeness, the content items and buttons that may be included in the **StdDlgContentArea** and **StdDlgButtonArea** nodes are listed; however, they do not inherit any properties from the nodes.
+
+| Node                                                         | Description                                                  |
+| :----------------------------------------------------------- | :----------------------------------------------------------- |
+| Group                                                        |                                                              |
+| ++ StdDlgAreaBase                                            | Provides common functionality for the **StdDlgTitleArea**, **StdDlgContentArea** and **StdDlgButtonArea** classes. |
+| ++++ StdDlgTitleArea                                         | Contains the title information and/or icons at the top of the dialog. |
+| ++++ StdDlgContentArea                                       | Contains the main body of the dialog, which may include zero to multiple content area items (**StdDlgItemBase** nodes), which are as follows: ${std-dlg-items-table} |
+| ++++ StdDlgButtonArea                                        | Contains any buttons (**StdDlgButton** nodes) in the button area located at the bottom of the dialog: |
+| ++++ StdDlgSideCardArea<br /><br />*Available since Roku OS 11.0* | A freeform area to the right or left side of a custom standard framework dialog that contains  decorative images or annotative text. |
+
+{#std-dlg-items-table}
+
+| Node                                                         | Description                                                  | Example                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| StdDlgItemBase                                               | Provides common functionality for all content area items.    |                                                              |
+| ++StdDlgItemGroup<br /><br />*Available since Roku OS 11.0*  | Visually groups a set of StdDlgAreaBase child nodes in a custom dialog |                                                              |
+| ++StdDlgActionCardItem<br /><br />*Available since Roku OS 11.0* | Highlights the StdDlgItemBase child nodes in the content area of a custom dialog. | ![roku400px - StdDlgBulletTextItem](https://image.roku.com/ZHZscHItMTc2/action-cards-example.png) |
+| ++ StdDlgBulletTextItem                                      | A bulleted list of text.                                     | ![roku400px - StdDlgBulletTextItem](https://image.roku.com/ZHZscHItMTc2/StdDlgBulletTextItem-v2.jpg) |
+| ++ StdDlgDeterminateProgressItem                             | A progress indicator that represents the percentage of the progress that has been completed. | ![roku400px - std-dlg-determinate-progress-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-determinate-progress-item-2.jpg) |
+| ++ StdDlgGraphicItem                                         | An image with an optional text label.                        | ![roku400px - v](https://image.roku.com/ZHZscHItMTc2/std-dlg-graphic-item.jpg) |
+| ++ StdDlgKeyboardItem                                        | Either a keyboard or PIN pad for the text and voice entry of alphanumeric/symbol strings or numeric digits (typically, short numeric PIN codes), respectively. | ![roku400px - std-dlg-keyboard-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-keyboard-item.jpg) |
+| ++ StdDlgMultiStyleTextItem<br /><br />*Available since Roku OS 11.0* | A line of text with multiple styles (for example, plain and bold characters, different fonts, multiple colors, and/or emojis). | ![roku400px - std-dlg-progress-item](https://image.roku.com/ZHZscHItMTc2/stdDlgMultiStyleTextItem-green-text.png) |
+| ++ StdDlgProgressItem                                        | A spinning progress indicator for tasks that take an indeterminate amount of time. | ![roku400px - std-dlg-progress-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-progress-item.jpg) |
+| ++ StdDlgTextItem                                            | A block of text.                                             | ![roku400px - std-dlg-text-item](https://image.roku.com/ZHZscHItMTc2/std-dlg-text-item.jpg) |
+| ++ StdDlgCustomItem<br /><br />*Available since Roku OS 11.0* | A free-form custom item.                                     | ![roku400px - custom-item-roku250px](https://image.roku.com/ZHZscHItMTc2/std-dlg-custom-item-multi-column.jpeg) |
