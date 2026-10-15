@@ -1,3 +1,11 @@
+# standard-dialog-framework has moved to GitLab
+
+**This project has moved.** Development now continues at **https://gitlab.com/rokudev/standard-dialog-framework**.
+
+This GitHub repository is archived and read-only. It is kept only as a pointer to the new home. Please open new issues and merge requests on GitLab.
+
+---
+
 # Standard dialog framework
 
 As part of the Roku OS 10.0 release, Roku's standard dialog framework enables developers to use new pre-built modal pop-up dialogs and build custom ones. Dialogs are used to display information to users that require their immediate attention (for example, selecting a subscription product, entering credentials or account information, informing the user that a screen is loading, and so on). 
